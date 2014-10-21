@@ -1,10 +1,11 @@
 var ko = require("knockout");
-var HomeViewModel = require("../viewmodels/homeViewModel");
+var MoviesViewModel = require("../viewmodels/moviesViewModel");
 
-var homeView = function() {
+var moviesView = function() {
     var viewModel = null;
     var init = function() {
-        viewModel = new HomeViewModel();
+        viewModel = new MoviesViewModel();
+        console.log(viewModel);
         ko.applyBindings(viewModel)
     };
     return {
@@ -13,4 +14,4 @@ var homeView = function() {
     };
 };
 
-module.exports = homeView();
+module.exports = moviesView();

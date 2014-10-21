@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CineProwl</title>
+        <link rel="stylesheet" href="/www/dist/styles.css" type="text/css" />
+    </head>
+    <body>
+        <img src="/www/images/background-dark.jpg" class='background texture'></img>
+        <section id='globalnav'></section>
+        
+        <section id='movies'>
+            <p class='pager' id='page-left'></p>
+            <ul data-bind='foreach: movies()'>
+                <li class='selectable movie'>
+                    <a data-bind='attr: { href: url }'>
+                        <img class='poster' data-bind='attr: { src: poster}'>
+                    </a>
+                </li>
+            </ul>
+            <p class='pager' id='page-right'></p>
+        </section>
+        <script type="text/javascript" src="/www/dist/app.js"></script>
+        <script type="text/javascript">
+            app.views.movies.init();
+        </script>
+    </body>
+</html>

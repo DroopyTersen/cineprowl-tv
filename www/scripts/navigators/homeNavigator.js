@@ -29,7 +29,7 @@ HomeNavigator.prototype.getActiveItem = function() {
 HomeNavigator.prototype.select = function() {
     var activeItem = this.getActiveItem();
     if (this.coords.x === 1) {
-        window.location.href = config.apiUrl + "/movies/search/" + $("#searchInput").val();
+        window.location.href = "/www/movies.html?search=" + $("#searchInput").val();
     } else {
         window.location.href = activeItem.url;
     }

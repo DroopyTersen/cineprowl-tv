@@ -1,6 +1,7 @@
 var gulp = require("gulp");
 var concat = require("gulp-concat");
 var browserify = require('gulp-browserify');
+var uglify = require("gulp-uglify");
 
 var paths = {
     dist: './www/dist',
@@ -31,6 +32,7 @@ var browserifyJs = function() {
       insertGlobals : true,
       debug : !gulp.env.production
     }))
+    //.pipe(uglify())
     .pipe(gulp.dest(paths.dist))
 }
 

@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "gulp-browserify": "^0.5.0",
-    "gulp-concat": "^2.4.1"
+    "gulp-concat": "^2.4.1",
+    "gulp-uglify": "^1.0.1"
   }
 }
