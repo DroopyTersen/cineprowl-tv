@@ -1,0 +1,21 @@
+#clock {
+position: fixed;
+top: 40px;
+right: 0px;
+background: rgba(0, 0, 0, .6);
+z-index: 1;
+color: #aaa;
+padding: 30px 40px 30px 80px;
+text-align: right;
+}
+#clock h1 {
+font-weight: 100;
+font-size: 6em;
+margin: 0;
+margin-top: 10px;
+} 
+#clock h3 {
+    font-size: 3em;
+    margin:0;
+    font-weight: 100;
+}

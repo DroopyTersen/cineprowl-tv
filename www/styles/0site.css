@@ -1,0 +1,41 @@
+/*====================*/
+/* CORE CSS */
+/*====================*/
+html { background: #000; }
+body {
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+    background:#000;
+    padding:0;
+    margin:0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight:200;
+    position:absolute;
+}
+
+body > img.background{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index:0;
+}
+img.background.texture {
+    opacity: .7;
+}
+img.background.backdrop {
+    opacity: .6;
+}
+.selectable {
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+.selectable:hover,
+.selectable.cursor {
+    border-color: #fff;
+    box-shadow: 0px 0px 8px #fff;
+}

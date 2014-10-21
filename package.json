@@ -1,0 +1,28 @@
+{
+  "name": "cineprowl-tv",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DroopyTersen/cineprowl-tv.git"
+  },
+  "author": "Andrew Petersen",
+  "bugs": {
+    "url": "https://github.com/DroopyTersen/cineprowl-tv/issues"
+  },
+  "homepage": "https://github.com/DroopyTersen/cineprowl-tv",
+  "dependencies": {
+    "gulp": "^3.8.8",
+    "jquery-browserify": "^1.8.1",
+    "knockout": "^3.2.0",
+    "cineprowl-models": "droopytersen/cineprowl-models"
+  },
+  "devDependencies": {
+    "gulp-browserify": "^0.5.0",
+    "gulp-concat": "^2.4.1"
+  }
+}

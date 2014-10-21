@@ -1,0 +1,40 @@
+/*====================*/
+
+/* GLOBAL NAVIGATION */
+
+/*====================*/
+
+#globalnav {
+    top: 0;
+    left: 0;
+    width: 330px;
+    background: rgba(0, 0, 0, .6);
+    height: 100%;
+    z-index: 1;
+    position: fixed;
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+}
+#globalnav .logo {
+padding-bottom: 0;
+transform: rotate(48deg);
+opacity: 0.7;
+margin: -15px 0px -10px 97px;
+}
+#globalnav ul {
+    padding: 20px 20px;
+    /*padding-top: 0;*/
+    list-style: none;
+    margin: 0;
+}
+#globalnav li {
+    font-size: 2.5em;
+    padding: 30px 20px;
+
+}
+
+#globalnav a,
+#globalnav a:visited,
+#globalnav a:visited {
+    text-decoration: none;
+    color: #eee;
+}
