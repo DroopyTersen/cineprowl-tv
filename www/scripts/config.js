@@ -1,26 +1,24 @@
 var config = {
     globalNav: [{
         title: "Home",
-        url: "/www/home.html",
-        id: "global-nav-home",
-        icon: "<img src='/www/images/logo-diagonal.png' class='logo'>"
+        url: "/home.html",
+        id: "global-nav-home"
     },{
         title: "Unwatched",
-        url: "/www/movies.html?watched=false",
-        id: "global-nav-unwatched",
-        icon: ""
+        url: "/movies.html?watched=false",
+        id: "global-nav-unwatched"
     },{
         title: "Genres",
-        url: "/www/Genres.html",
-        id: "global-nav-genres",
-        icon: ""
+        url: "/Genres.html",
+        id: "global-nav-genres"
     },{
         title: "Recent",
-        url: "/www/movies.html?sort=addedToDb",
-        id: "global-nav-recent",
-        icon: ""
+        url: "/movies.html?sort=addedToDb",
+        id: "global-nav-recent"
     }],
-    apiUrl: "https://cineprowl-api-c9-andrew-petersen.c9.io"
+    apiUrl: "https://cineprowl-api-c9-andrew-petersen.c9.io",
+    streamUrl: "http://runwatcher.com:8081/stream/",
+    playUrl: "http://localhost:5000/omc/"
 };
 
 module.exports = config;

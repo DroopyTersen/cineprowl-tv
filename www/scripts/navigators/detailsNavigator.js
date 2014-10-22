@@ -1,41 +1,34 @@
 var config = require("../config");
 var $ = require("jquery-browserify");
 var navigatorEvents = require("./navigationEvents");
-var HomeNavigator = function() {
+var DetailsNavigator = function() {
     this.grid = [];
     this.coords = { x: 1, y: 0 }
     this.grid[0] = config.globalNav;
     this.grid[1] = [{
-        title: "Search",
-        id: "home-search"
+        title: "play",
+        id: "play"
     }];
     
     navigatorEvents.bindEvents(this);
 };
 
-HomeNavigator.prototype.getActiveItem = function() {
+DetailsNavigator.prototype.getActiveItem = function() {
     var activeItem = this.grid[this.coords.x][this.coords.y];
     $(".cursor").removeClass("cursor");
     $("#" + activeItem.id).addClass("cursor");
-    //focus on the seach box
-    if (this.coords.x === 1) {
-        $("#searchInput").focus();
-    } else {
-        $("#searchInput").blur();
-    }
     return activeItem;
 };
 
-HomeNavigator.prototype.select = function() {
+DetailsNavigator.prototype.select = function() {
     var activeItem = this.getActiveItem();
     if (this.coords.x === 1) {
-        window.location.href = "/movies.html?search=" + $("#searchInput").val();
+        $(document).trigger("play-movie");
     } else {
         window.location.href = activeItem.url;
     }
-    //return this.getActiveItem();
 }
-HomeNavigator.prototype.moveUp = function() {
+DetailsNavigator.prototype.moveUp = function() {
     if (this.coords.x === 0) {
         //Its at the top already
         if (this.coords.y === 0) {
@@ -47,7 +40,7 @@ HomeNavigator.prototype.moveUp = function() {
     }
     return this.getActiveItem();
 };
-HomeNavigator.prototype.moveDown = function() {
+DetailsNavigator.prototype.moveDown = function() {
     if (this.coords.x === 0) {
         //its at the bottom already
         if (this.coords.y === this.grid[0].length - 1) {
@@ -59,7 +52,7 @@ HomeNavigator.prototype.moveDown = function() {
     }
     return this.getActiveItem();
 };
-HomeNavigator.prototype.moveLeft = function() {
+DetailsNavigator.prototype.moveLeft = function() {
     if (this.coords.x === 0) {
         this.coords.x = 1;
         this.coords.y = 0
@@ -69,7 +62,7 @@ HomeNavigator.prototype.moveLeft = function() {
     }
     return this.getActiveItem();
 };
-HomeNavigator.prototype.moveRight = function() {
+DetailsNavigator.prototype.moveRight = function() {
     if (this.coords.x === 0) {
         this.coords.x = 1;
         this.coords.y = 0
@@ -80,4 +73,4 @@ HomeNavigator.prototype.moveRight = function() {
     return this.getActiveItem();
 };
 
-module.exports = HomeNavigator;
+module.exports = DetailsNavigator;

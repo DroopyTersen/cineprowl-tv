@@ -1,7 +1,14 @@
 /*====================*/
 /* CORE CSS */
 /*====================*/
-html { background: #000; }
+html { 
+    background: #000;
+    background-image: url('/images/logo-small.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 100%;
+    height: 100%;
+}
 body {
     width: 100%;
     height: 100%;
@@ -9,10 +16,17 @@ body {
     background:#000;
     padding:0;
     margin:0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Abel', sans-serif;
     font-size: 18px;
     font-weight:200;
     position:absolute;
+}
+.arrow-right {
+width: 0;
+height: 0;
+border-top: 100px solid transparent;
+border-bottom: 100px solid transparent;
+border-left: 140px solid #fff;
 }
 
 body > img.background{
@@ -50,10 +64,11 @@ padding: 30px 40px 30px 80px;
 text-align: right;
 }
 #clock h1 {
-font-weight: 100;
+font-weight: bold;
 font-size: 6em;
 margin: 0;
 margin-top: 10px;
+width: 565px;
 } 
 #clock h3 {
     font-size: 3em;
@@ -73,15 +88,12 @@ margin-top: 10px;
     width: 330px;
     background: rgba(0, 0, 0, .6);
     height: 100%;
-    z-index: 1;
+    z-index: 10;
     position: fixed;
     border-right: 2px solid rgba(255, 255, 255, 0.2);
 }
 #globalnav .logo {
-padding-bottom: 0;
-transform: rotate(48deg);
-opacity: 0.7;
-margin: -15px 0px -10px 97px;
+    margin: 30px 0px -10px 105px;
 }
 #globalnav ul {
     padding: 20px 20px;
@@ -92,14 +104,51 @@ margin: -15px 0px -10px 97px;
 #globalnav li {
     font-size: 2.5em;
     padding: 30px 20px;
-
 }
-
 #globalnav a,
 #globalnav a:visited,
 #globalnav a:visited {
     text-decoration: none;
-    color: #eee;
+    color: rgba(255, 255, 255, .5);
+}
+#globalnav li.cursor a,
+#globalnav li:hover a {
+    color: #fff;
+}
+
+#play {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    position: relative;
+    top: 400px;
+    left: 20px;
+    opacity: .7;
+}
+#play .arrow-right {
+    position: relative;
+    left: 30px;
+}
+#play:hover,
+#play.cursor {
+    transform: scale(1.5, 1.5);
+    opacity: .9;
+    cursor: pointer;
+}
+#title {
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    background: rgba(0, 0, 0, .6);
+    z-index: 1;
+    color: #aaa;
+    padding: 30px 40px 30px 80px;
+    text-align: right;
+}
+#title h1 {
+    font-weight: bold;
+    font-size: 3em;
+    margin: 0;
 }
 #random-title {
     position: fixed;
@@ -153,6 +202,7 @@ margin: -15px 0px -10px 97px;
     position: fixed;
     top: 175px;
 }
+
 #movies ul {
     list-style: none;
     margin: 0;
@@ -166,7 +216,7 @@ margin: -15px 0px -10px 97px;
     height: 360px;
     /*position:absolute;*/
     float: left;
-    opacity: 0.6;
+    opacity: 0.75;
     border-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0px 0px 0px 1px #FF7E00;
 }
@@ -178,9 +228,10 @@ margin: -15px 0px -10px 97px;
 #movies li.movie.cursor {
     opacity: 1;
     border-color: #fff;
-    transform: scale(1.065, 1.065);
-    box-shadow: 0px 0px 2px 3px #FF7E00;
-    z-index:2;
+    transform: scale(1.12, 1.12);
+    box-shadow: 0px 0px 0px 7px #FF7E00;
+    z-index: 2;
+    position: relative;
 }
 #movies .pager {
     position: absolute;
@@ -200,9 +251,9 @@ margin: -15px 0px -10px 97px;
 }
 #movies .pager:hover,
 #movies .pager.cursor {
-border-color: #FF5700;
-border-width: 10px;
-opacity: 1;
+    border-color: #FF5700;
+    border-width: 10px;
+    opacity: 1;
 }
 #page-left:hover,
 #page-left.cursor {
@@ -215,4 +266,23 @@ opacity: 1;
 #page-right:hover,
 #page-right.cursor {
     transform: rotate(45deg) scale(1.5, 1.5);
+}
+#header {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    background: rgba(0, 0, 0, .6);
+    z-index: 1;
+    color: #aaa;
+    padding: 20px 30px 20px 30px;
+    width: 100%;
+    height: 85px;
+}
+#header .selected-movie {
+    float: right;
+    font-weight: 200;
+}
+#header .selected-movie h1 {
+    font-weight: 100;
+    font-style: italic;
 }

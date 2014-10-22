@@ -1,0 +1,34 @@
+#play {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    position: relative;
+    top: 400px;
+    left: 20px;
+    opacity: .7;
+}
+#play .arrow-right {
+    position: relative;
+    left: 30px;
+}
+#play:hover,
+#play.cursor {
+    transform: scale(1.5, 1.5);
+    opacity: .9;
+    cursor: pointer;
+}
+#title {
+    position: fixed;
+    top: 40px;
+    right: 0px;
+    background: rgba(0, 0, 0, .6);
+    z-index: 1;
+    color: #aaa;
+    padding: 30px 40px 30px 80px;
+    text-align: right;
+}
+#title h1 {
+    font-weight: bold;
+    font-size: 3em;
+    margin: 0;
+}

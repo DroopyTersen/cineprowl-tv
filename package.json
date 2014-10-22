@@ -16,10 +16,12 @@
   },
   "homepage": "https://github.com/DroopyTersen/cineprowl-tv",
   "dependencies": {
+    "cineprowl-models": "droopytersen/cineprowl-models",
+    "express": "^4.9.8",
     "gulp": "^3.8.8",
     "jquery-browserify": "^1.8.1",
     "knockout": "^3.2.0",
-    "cineprowl-models": "droopytersen/cineprowl-models"
+    "omxcontrol": "0.0.1"
   },
   "devDependencies": {
     "gulp-browserify": "^0.5.0",

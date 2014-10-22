@@ -2,10 +2,11 @@
 <html>
     <head>
         <title>CineProwl</title>
-        <link rel="stylesheet" href="/www/dist/styles.css" type="text/css" />
+        <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/dist/styles.css" type="text/css" />
     </head>
-    <body>
-        <img src="/www/images/background-dark.jpg" class='background texture'></img>
+    <body style='display:none'>
+        <img src="/images/background-dark.jpg" class='background texture'></img>
         <img class='background backdrop' data-bind='attr: { src: randomMovie().backdrop }'>
         <section id='globalnav'></section>
         <section id='clock'>
@@ -14,14 +15,14 @@
         </section>
         <section id='home-search' class='selectable'>
             <form data-bind='submit: search'>
-                <input id='searchInput' placeholder=' Type a movie title...' data-bind='textInput: searchText' />
+                <input id='searchInput' placeholder='Search movies...' data-bind='textInput: searchText' />
                 <button type='submit'>Go</button>
             </form>
         </section>
         <section id='random-title'>
             <h1 data-bind='text: randomMovie().title'></h1>
         </section>
-        <script type="text/javascript" src="/www/dist/app.js"></script>
+        <script type="text/javascript" src="/dist/app.js"></script>
         <script type="text/javascript">
             app.views.home.init();
         </script>

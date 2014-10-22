@@ -9,7 +9,7 @@ var HomeViewModel = function() {
     var self = this;
     self.navigator = null;
     self.activeItem = null;
-    self.randomMovie = ko.observable({ backdrop: "/www/images/logo-large2.png"});
+    self.randomMovie = ko.observable({ backdrop: "/images/logo-large2.png"});
     self.clock = require("./clockViewModel");
     self.searchText = ko.observable("");
     
@@ -18,18 +18,20 @@ var HomeViewModel = function() {
         self.clock.init();
         self.navigator = new HomeNavigator();
         self.navigator.getActiveItem();
-        self.updateRandomMovie();
+        self.updateRandomMovie().then(function(){
+            $("body").fadeIn();
+            $("#searchInput").focus();
+        });
         setInterval(self.updateRandomMovie, 10000);
     };
     
     self.search = function() {
-        alert(self.searchText());
+        window.location.href = "/movies.html?search=" + self.searchText();
     };
     
     self.updateRandomMovie = function() {
-        dataservice.movies.getRandom().then(function(movie) {
+        return dataservice.movies.getRandom().then(function(movie) {
             self.randomMovie(movie);
-            console.log(self.randomMovie());
         }) 
     };
     

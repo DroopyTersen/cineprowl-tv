@@ -3,7 +3,7 @@ var ko = require("knockout");
 
 var templater = function() {
     var insertHtml = function(templateName, element) {
-        return $.get("/www/templates/" + templateName + ".html")
+        return $.get("/templates/" + templateName + ".html")
             .then(function(html){
                 $(element).html(html);
             });

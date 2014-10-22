@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>CineProwl</title>
-        <link rel="stylesheet" href="/www/dist/styles.css" type="text/css" />
-    </head>
-    <body>
-        <img src="/www/images/background-dark.jpg" class='background texture'></img>
-        <section id='globalnav'></section>
-        
-        <section id='movies'>
-            <p class='pager' id='page-left'></p>
-            <ul data-bind='foreach: movies()'>
-                <li class='selectable movie'>
-                    <a data-bind='attr: { href: url }'>
-                        <img class='poster' data-bind='attr: { src: poster}'>
-                    </a>
-                </li>
-            </ul>
-            <p class='pager' id='page-right'></p>
-        </section>
-        <script type="text/javascript" src="/www/dist/app.js"></script>
-        <script type="text/javascript">
-            app.views.movies.init();
-        </script>
-    </body>
+
+<head>
+    <title>CineProwl</title>
+    <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/dist/styles.css" type="text/css" />
+
+</head>
+
+<body style='display:none'>
+    <img src="/images/background-dark.jpg" class='background texture'></img>
+    <img class='background backdrop' data-bind='attr: { src: selectedMovie().backdrop }'>
+    <section id='globalnav'></section>
+    <section id='header'>
+        <div class='selected-movie'>
+            <h1 data-bind='text: selectedMovie().title'></h1>
+        </div>
+    </section>
+    <section id='movies'>
+        <p data-bind='visible: showLeftArrow()' class='pager' id='page-left'></p>
+        <ul data-bind='foreach: movies()'>
+            <li class='selectable movie' data-bind='attr: { id: id }'>
+                <a data-bind='attr: { href: url }'>
+                    <img class='poster' data-bind='attr: { src: poster}'>
+                </a>
+            </li>
+        </ul>
+        <p data-bind='visible: showRightArrow()' class='pager' id='page-right'></p>
+    </section>
+    <script type="text/javascript" src="/dist/app.js"></script>
+    <script type="text/javascript">
+        app.views.movies.init();
+    </script>
+        <style>
+        body {
+            /*background-color: #151515;*/
+        }
+        img.background.texture {
+            opacity: .1;
+        }
+        img.background.backdrop {
+            opacity: .15;
+        }
+    </style>
+</body>
+
 </html>
