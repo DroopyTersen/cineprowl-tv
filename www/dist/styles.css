@@ -1,35 +1,35 @@
-/*====================*/
+/* ==================== */
 /* CORE CSS */
-/*====================*/
-html { 
+/* ==================== */
+html {
     background: #000;
     background-image: url('/images/logo-small.png');
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     width: 100%;
     height: 100%;
 }
 body {
     width: 100%;
     height: 100%;
-    overflow:hidden;
-    background:#000;
-    padding:0;
-    margin:0;
+    overflow: hidden;
+    background: #000;
+    padding: 0;
+    margin: 0;
     font-family: 'Abel', sans-serif;
     font-size: 18px;
-    font-weight:200;
-    position:absolute;
+    font-weight: 200;
+    position: absolute;
+    transform: scale(.965, .965);
 }
 .arrow-right {
-width: 0;
-height: 0;
-border-top: 100px solid transparent;
-border-bottom: 100px solid transparent;
-border-left: 140px solid #fff;
+    width: 0;
+    height: 0;
+    border-top: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-left: 140px solid #fff;
 }
-
-body > img.background{
+body > img.background {
     margin: 0;
     padding: 0;
     position: fixed;
@@ -37,7 +37,7 @@ body > img.background{
     left: 0;
     width: 100%;
     height: 100%;
-    z-index:0;
+    z-index: 0;
 }
 img.background.texture {
     opacity: .7;
@@ -48,8 +48,7 @@ img.background.backdrop {
 .selectable {
     border: 2px solid rgba(0, 0, 0, 0);
 }
-.selectable:hover,
-.selectable.cursor {
+.selectable:hover, .selectable.cursor {
     border-color: #fff;
     box-shadow: 0px 0px 8px #fff;
 }
@@ -202,7 +201,6 @@ width: 565px;
     position: fixed;
     top: 175px;
 }
-
 #movies ul {
     list-style: none;
     margin: 0;
@@ -214,7 +212,8 @@ width: 565px;
     margin: 7px;
     width: 230px;
     height: 360px;
-    /*position:absolute;*/
+    /* position: absolute;
+    */
     float: left;
     opacity: 0.75;
     border-color: rgba(255, 255, 255, 0.6);
@@ -224,8 +223,7 @@ width: 565px;
     width: 100%;
     height: 100%;
 }
-#movies li.movie:hover,
-#movies li.movie.cursor {
+#movies li.movie:hover, #movies li.movie.cursor {
     opacity: 1;
     border-color: #fff;
     transform: scale(1.12, 1.12);
@@ -249,22 +247,19 @@ width: 565px;
     transform: rotate(-135deg);
     left: 25px;
 }
-#movies .pager:hover,
-#movies .pager.cursor {
+#movies .pager:hover, #movies .pager.cursor {
     border-color: #FF5700;
     border-width: 10px;
     opacity: 1;
 }
-#page-left:hover,
-#page-left.cursor {
+#page-left:hover, #page-left.cursor {
     transform: rotate(-135deg) scale(1.5, 1.5);
 }
 #page-right {
     transform: rotate(45deg);
     left: 1320px;
 }
-#page-right:hover,
-#page-right.cursor {
+#page-right:hover, #page-right.cursor {
     transform: rotate(45deg) scale(1.5, 1.5);
 }
 #header {
@@ -285,4 +280,20 @@ width: 565px;
 #header .selected-movie h1 {
     font-weight: 100;
     font-style: italic;
+}
+#context {
+    position: absolute;
+    top: 15px;
+    left: 480px;
+    width: 450px;
+}
+#context .filter {
+    font-weight: 100;
+    margin:0;
+    line-height: 1;
+}
+#context .page {
+    font-weight: 100;
+    margin:0;
+    margin-top: 10px;
 }

@@ -15,6 +15,7 @@ var DetailsViewModel = function() {
         globalNavViewModel.init();
         var id = queryString.getValue("id");
         dataservice.movies.byId(id).then(function(movie){
+            console.log(movie);
             self.movie(movie);
             $("body").fadeIn(function(){
                 self.navigator.getActiveItem();

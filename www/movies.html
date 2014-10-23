@@ -9,10 +9,14 @@
 </head>
 
 <body style='display:none'>
-    <img src="/images/background-dark.jpg" class='background texture'></img>
+    <img src="/images/background-dark.jpg" class='background texture'>
     <img class='background backdrop' data-bind='attr: { src: selectedMovie().backdrop }'>
     <section id='globalnav'></section>
     <section id='header'>
+        <div id='context'>
+            <h2 class='filter' data-bind='text: contextText()'></h2>
+            <h3 class='page' data-bind='text: "Page " + (context.page() + 1)'></h3>
+        </div>
         <div class='selected-movie'>
             <h1 data-bind='text: selectedMovie().title'></h1>
         </div>
@@ -33,9 +37,6 @@
         app.views.movies.init();
     </script>
         <style>
-        body {
-            /*background-color: #151515;*/
-        }
         img.background.texture {
             opacity: .1;
         }

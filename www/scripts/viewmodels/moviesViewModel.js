@@ -11,11 +11,23 @@ var MoviesViewModel = function() {
     this.movies = ko.observableArray([]);
     this.navigator = new MoviesNavigator();
     this.context = {
-        sort: "addedToDb",
-        filter: null,
-        search: "",
+        sort: ko.observable("addedToDb"),
+        filter: ko.observable({}),
+        search: ko.observable(""),
         page: ko.observable(0)
     };
+
+    this.contextText = ko.computed(function() {
+        var items = [];
+
+        if (self.context.filter() && self.context.filter().watched === false) {
+            items.push("unwatched");
+        }
+        if (self.context.search()) {
+            items.push("'" + self.context.search() + "'");
+        }
+        return "Showing " + items.join(", ") + " movies";
+    }, this);
 
     this.showLeftArrow = ko.computed(function() {
         return self.context.page() > 0;
@@ -39,12 +51,12 @@ var MoviesViewModel = function() {
 
     var processQueryString = function() {
         if (queryString.contains("search")) {
-            self.context.search = queryString.getValue("search");
+            self.context.search(queryString.getValue("search"));
         }
         if (queryString.contains("watched")) {
-            self.context.filter = {
-                watched: queryString.getValue("watched") === "true" ? true : false 
-            };
+            self.context.filter({
+                watched: queryString.getValue("watched") === "true" ? true : false
+            });
         }
     };
 
@@ -68,7 +80,7 @@ var MoviesViewModel = function() {
         navigationMove: function() {
             self.activeItem(self.navigator.getActiveItem());
         }
-    }
+    };
 
     var init = function() {
         globalNavViewModel.init();
@@ -85,6 +97,6 @@ var MoviesViewModel = function() {
     };
 
     init();
-}
+};
 
 module.exports = MoviesViewModel;
