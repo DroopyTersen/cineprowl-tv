@@ -18,8 +18,10 @@ var startExpress = function() {
 	    omx.play(streamUrl + req.params.id);
 	});
 	//this starts the server
-	app.listen(EXPRESS_PORT);
-	console.log("Server started on port " + EXPRESS_PORT);
+	if (process.env.IP) app.listen(process.env.PORT, process.env.IP);
+	else app.listen(EXPRESS_PORT);
+	
+	console.log("Server started on port " + process.env.PORT);
 };
 
 startExpress();

@@ -23,6 +23,7 @@ var HomeViewModel = function() {
             $("#searchInput").focus();
         });
         setInterval(self.updateRandomMovie, 10000);
+        $(document).on("search-movies", self.search);
     };
     
     self.search = function() {

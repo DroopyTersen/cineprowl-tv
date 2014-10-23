@@ -1,7 +1,7 @@
 var $ = require("jquery-browserify");
 var config = require("../config");
 var imageHelper = require("CineProwl-Models").imageHelper;
-var cache = require("./localStorage");
+var cache = require("./cache").sessionStorage;
 
 var dataservice = function() {
     var _allMovies = [];
