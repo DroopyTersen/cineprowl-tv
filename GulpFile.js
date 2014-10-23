@@ -34,7 +34,7 @@ var browserifyJs = function() {
     }))
     //.pipe(uglify())
     .pipe(gulp.dest(paths.dist))
-}
+};
 
 gulp.task('css', concatCss);
 gulp.task('browserify', browserifyJs);

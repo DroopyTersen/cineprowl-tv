@@ -4,6 +4,7 @@ var globalNavViewModel = require("./globalNavViewModel");
 var DetailsNavigator = require("../navigators/detailsNavigator");
 var config = require("../config");
 var ko = require("knockout");
+var $ = require("jquery-browserify");
 
 var DetailsViewModel = function() {
     var self = this;
@@ -14,6 +15,7 @@ var DetailsViewModel = function() {
         globalNavViewModel.init();
         var id = queryString.getValue("id");
         dataservice.movies.byId(id).then(function(movie){
+            console.log(movie);
             self.movie(movie);
             $("body").fadeIn(function(){
                 self.navigator.getActiveItem();
@@ -24,11 +26,12 @@ var DetailsViewModel = function() {
     };
     
     this.play = function() {
-        var streamUrl = config.streamUrl + self.movie().id;
-        window.open(streamUrl);
+        var streamUrl = config.playUrl + self.movie().id;
+        $.get(streamUrl);
+        //window.open(streamUrl);
     };
     
     init();
-}
+};
 
 module.exports = DetailsViewModel;
