@@ -1,6 +1,6 @@
 var config = require("../config");
 var $ = require("jquery-browserify");
-var Navigator = require("./navigator");
+var Navigator = require("./baseNavigator");
 var HomeNavigator = function() {
     Navigator.call(this);
     this.coords = { x: 1, y: 0 }
