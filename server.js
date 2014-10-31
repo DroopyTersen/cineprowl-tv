@@ -19,6 +19,7 @@ var startExpress = function() {
 		//};
 		runShell("omxplayer", ["-o", "hdmi", streamUrl]);
 	});
+	
 	//this starts the server
 	if (process.env.IP) app.listen(process.env.PORT, process.env.IP);
 	else app.listen(EXPRESS_PORT);

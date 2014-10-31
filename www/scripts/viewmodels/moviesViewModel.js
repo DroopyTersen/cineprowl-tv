@@ -71,14 +71,23 @@ var MoviesViewModel = function() {
     var eventHandlers = {
         pageLeft: function() {
             self.context.page(self.context.page() > 0 ? self.context.page() - 1 : 0);
-            loadMovies();
+            loadMovies().then(eventHandlers.navigationMove);
         },
         pageRight: function() {
             self.context.page(self.context.page() + 1);
-            loadMovies();
+            loadMovies().then(eventHandlers.navigationMove);
         },
         navigationMove: function() {
-            self.activeItem(self.navigator.getActiveItem());
+            $(".background.backdrop").fadeOut(function(){
+                $(".background.backdrop").remove();
+                self.activeItem(self.navigator.getActiveItem());
+                var $img = $("<img style='display:none' class='background backdrop' />")
+                    .load(function(){
+                        $(".background.backdrop").fadeIn();
+                    })
+                    .attr('src',  self.selectedMovie().backdrop);  
+                $("#backgrounds").append($img);
+            });
         }
     };
 
@@ -87,8 +96,7 @@ var MoviesViewModel = function() {
         processQueryString();
         loadMovies().then(function(){
             $("body").fadeIn(function(){
-                
-                self.activeItem(self.navigator.getActiveItem());
+                eventHandlers.navigationMove();
             });
         });
         $(document).on("page-right", eventHandlers.pageRight);

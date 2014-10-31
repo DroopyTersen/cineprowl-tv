@@ -29,7 +29,7 @@ body {
     border-bottom: 100px solid transparent;
     border-left: 140px solid #fff;
 }
-body > img.background {
+body img.background {
     margin: 0;
     padding: 0;
     position: fixed;

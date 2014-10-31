@@ -15,7 +15,8 @@ var dataservice = function() {
 
     var processMovie = function(movie) {
         movie.url = "/details.html?id=" + movie.id;
-        movie.poster = imageHelper.buildLink("w342", movie.poster_path);
+        //movie.poster = imageHelper.buildLink("w342", movie.poster_path);
+        movie.poster = imageHelper.poster.getMid(movie.poster_path);
         movie.backdrop = imageHelper.backdrop.getMid(movie.backdrop_path);
         return movie;
     };

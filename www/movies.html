@@ -9,8 +9,11 @@
 </head>
 
 <body style='display:none'>
-    <img src="/images/background-dark.jpg" class='background texture'>
-    <img class='background backdrop' data-bind='attr: { src: selectedMovie().backdrop }'>
+    <span id='backgrounds'>
+        <img src="/images/background-dark.jpg" class='background texture'>
+        <img class='background backdrop'>   
+    </span>
+
     <section id='globalnav'></section>
     <section id='header'>
         <div id='context'>

@@ -20,6 +20,7 @@ body {
     font-size: 18px;
     font-weight: 200;
     position: absolute;
+    -webkit-transform: scale(.965, .965);
     transform: scale(.965, .965);
 }
 .arrow-right {
@@ -29,7 +30,7 @@ body {
     border-bottom: 100px solid transparent;
     border-left: 140px solid #fff;
 }
-body > img.background {
+body img.background {
     margin: 0;
     padding: 0;
     position: fixed;
@@ -130,6 +131,7 @@ width: 565px;
 }
 #play:hover,
 #play.cursor {
+    -webkit-transform: scale(1.5, 1.5);
     transform: scale(1.5, 1.5);
     opacity: .9;
     cursor: pointer;
@@ -226,6 +228,7 @@ width: 565px;
 #movies li.movie:hover, #movies li.movie.cursor {
     opacity: 1;
     border-color: #fff;
+    -webkit-transform: scale(1.12, 1.12);
     transform: scale(1.12, 1.12);
     box-shadow: 0px 0px 0px 7px #FF7E00;
     z-index: 2;
@@ -244,6 +247,7 @@ width: 565px;
     opacity: .4;
 }
 #page-left {
+    -webkit-transform: rotate(-135deg);
     transform: rotate(-135deg);
     left: 25px;
 }
@@ -253,13 +257,16 @@ width: 565px;
     opacity: 1;
 }
 #page-left:hover, #page-left.cursor {
+    -webkit-transform: rotate(-135deg) scale(1.5, 1.5);
     transform: rotate(-135deg) scale(1.5, 1.5);
 }
 #page-right {
+    -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     left: 1320px;
 }
 #page-right:hover, #page-right.cursor {
+    -webkit-transform: rotate(45deg) scale(1.5, 1.5);
     transform: rotate(45deg) scale(1.5, 1.5);
 }
 #header {

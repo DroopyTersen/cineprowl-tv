@@ -45,5 +45,5 @@ gulp.task('browserify', browserifyJs);
 gulp.task('default', function() {
     concatCss();
     browserifyJs();
-    //setupWatch();
+    setupWatch();
 });
