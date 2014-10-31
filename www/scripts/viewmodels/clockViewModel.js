@@ -17,12 +17,12 @@ var clockViewModel = function() {
         now({
             day: _now.format("dddd"),
             date: _now.format("MMM Do"),
-            time: _now.format("h:mm:ss a")
+            time: _now.format("h:mm a")
         });
     };
     var init = function() {
         update();
-        setInterval(update, 1000);
+        setInterval(update, 20000);
     };
     
     return {

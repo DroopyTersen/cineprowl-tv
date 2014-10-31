@@ -2,7 +2,7 @@ var gulp = require("gulp");
 var concat = require("gulp-concat");
 var browserify = require('gulp-browserify');
 var uglify = require("gulp-uglify");
-
+var autoprefixer = require('gulp-autoprefixer');
 var paths = {
     dist: './www/dist',
     css: './www/styles/*.css',
@@ -23,6 +23,10 @@ var setupWatch = function() {
 var concatCss = function() {
     gulp.src(paths.css)
     .pipe(concat('styles.css'))
+    .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+    }))
     .pipe(gulp.dest(paths.dist));
 };
 

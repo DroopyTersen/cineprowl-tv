@@ -1,8 +1,7 @@
-var queryString = require("../services/queryString");
 var dataservice = require("../services/dataservice");
 var globalNavViewModel = require("./globalNavViewModel");
 var MoviesNavigator = require("../navigators/moviesNavigator");
-
+var qs = require("querystring");
 var ko = require("knockout");
 
 var MoviesViewModel = function() {
@@ -50,12 +49,13 @@ var MoviesViewModel = function() {
     });
 
     var processQueryString = function() {
-        if (queryString.contains("search")) {
-            self.context.search(queryString.getValue("search"));
+        var params = qs.parse(window.location.search.substring(1));
+        if (params.search) {
+            self.context.search(params.search);
         }
-        if (queryString.contains("watched")) {
+        if (typeof params.watched !== undefined) {
             self.context.filter({
-                watched: queryString.getValue("watched") === "true" ? true : false
+                watched: (params.watched === "true")
             });
         }
     };
