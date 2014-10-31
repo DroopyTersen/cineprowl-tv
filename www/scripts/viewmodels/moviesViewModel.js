@@ -1,6 +1,6 @@
 var dataservice = require("../services/dataservice");
 var globalNavViewModel = require("./globalNavViewModel");
-var MoviesNavigator = require("../navigators/moviesNavigator");
+var MoviesNavigator = require("../navigators/gridNavigator");
 var qs = require("querystring");
 var ko = require("knockout");
 
@@ -21,6 +21,9 @@ var MoviesViewModel = function() {
 
         if (self.context.filter() && self.context.filter().watched === false) {
             items.push("unwatched");
+        }
+        if (self.context.filter() && self.context.filter().genre) {
+            items.push(self.context.filter().genre);
         }
         if (self.context.search()) {
             items.push("'" + self.context.search() + "'");
@@ -53,10 +56,15 @@ var MoviesViewModel = function() {
         if (params.search) {
             self.context.search(params.search);
         }
-        if (typeof params.watched !== undefined) {
+        if (typeof params.watched !== 'undefined') {
             self.context.filter({
                 watched: (params.watched === "true")
             });
+        }
+        if (typeof params.genre !== 'undefined') {
+            var filter = self.context.filter();
+            filter.genre = params.genre;
+            self.context.filter(filter);
         }
     };
 

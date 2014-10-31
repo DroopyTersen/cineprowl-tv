@@ -10,13 +10,6 @@ var startExpress = function() {
 	app.use(express.static(__dirname + "/www"));
 	app.get("/omc/:id", function(req, res) {
 		var streamUrl = "http://runwatcher.com:8081/stream/" + req.params.id;
-
-		//comment this out
-		//var omx = {
-		//	play: function(filepath) {
-		//		runShell("C:\\VLC\\vlc.exe", [filepath]);
-		//	}
-		//};
 		runShell("omxplayer", ["-o", "hdmi", streamUrl]);
 	});
 	
