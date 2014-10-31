@@ -36,7 +36,7 @@ var browserifyJs = function() {
       insertGlobals : true,
       debug : !gulp.env.production
     }))
-    //.pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest(paths.dist))
 };
 
@@ -45,5 +45,5 @@ gulp.task('browserify', browserifyJs);
 gulp.task('default', function() {
     concatCss();
     browserifyJs();
-    setupWatch();
+    //setupWatch();
 });

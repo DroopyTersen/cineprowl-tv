@@ -12,17 +12,18 @@ var startExpress = function() {
 		var streamUrl = "http://runwatcher.com:8081/stream/" + req.params.id;
 
 		//comment this out
-		var omx = {
-			play: function(filepath) {
-				runShell("C:\\VLC\\vlc.exe", [filepath]);
-			}
-		};
-		omx.play(streamUrl);
+		//var omx = {
+		//	play: function(filepath) {
+		//		runShell("C:\\VLC\\vlc.exe", [filepath]);
+		//	}
+		//};
+		runShell("omxplayer", ["-o", "hdmi", streamUrl]);
 	});
 	//this starts the server
 	if (process.env.IP) app.listen(process.env.PORT, process.env.IP);
 	else app.listen(EXPRESS_PORT);
 	
+	//runShell("chromium", ["--kiosk", "http://localhost:5000/home.html"]);
 	console.log("Server started on port " + process.env.PORT);
 };
 
