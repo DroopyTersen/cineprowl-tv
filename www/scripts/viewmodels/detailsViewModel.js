@@ -21,21 +21,26 @@ var DetailsViewModel = function() {
         var params = qs.parse(window.location.search.substring(1));
         if (params.id) {
             dataservice.movies.byId(params.id).then(function(movie) {
-                console.log(movie);
                 self.movie(movie);
                 $("body").fadeIn(function() {
                     self.navigator.getActiveItem();
                 });
             });
 
-            $(document).on("play-movie", self.play);
+            $(document).on("play-movie-raw", self.playRaw);
+            $(document).on("play-movie-mobile", self.playMobile);
         } else {
             alert("Hey dummy! Pass in an id.");
         }
     };
 
-    this.play = function() {
+    this.playRaw = function() {
         var streamUrl = config.playUrl + self.movie().id;
+        $.get(streamUrl);
+        //window.open(streamUrl);
+    };
+    this.playMobile = function() {
+        var streamUrl = config.playUrl + self.movie().id + "?size=mobile";
         $.get(streamUrl);
         //window.open(streamUrl);
     };

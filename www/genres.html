@@ -12,21 +12,23 @@
             <div id='context'>
                 <h3 class='page' data-bind='text: "Page " + (context.page() + 1)'></h3>
             </div>
-            <div class='selected-movie'>
+            <div class='selected-item'>
                 <h1 data-bind='text: selectedItem().name'></h1>
             </div>
         </section>
-        <section id='movies'>
-        <p data-bind='visible: showLeftArrow()' class='pager' id='page-left'></p>
-        <ul data-bind='foreach: items()'>
-            <li class='selectable movie' data-bind='attr: { id: id }'>
-                <a data-bind='attr: { href: url }'>
-                    <h3 data-bind='{text: name}'></h3>
-                </a>
-            </li>
-        </ul>
-        <p data-bind='visible: showRightArrow()' class='pager' id='page-right'></p>
-    </section>
+        <section class='paged-grid' id='genres'>
+            <p data-bind='visible: showLeftArrow()' class='pager' id='page-left'></p>
+            <ul data-bind='foreach: items()'>
+                <li class='selectable grid-item ' data-bind='attr: { id: id }'>
+                    <a data-bind='attr: { href: url }'>
+                        <h1 class='name' data-bind='{text: name}'></h1>
+                        <h4>Unwatched</h4>
+                        <p class='stats' data-bind='text: unwatched + " / " + count'></p>
+                    </a>
+                </li>
+            </ul>
+            <p data-bind='visible: showRightArrow()' class='pager' id='page-right'></p>
+        </section>
         <script type="text/javascript" src="/dist/app.js"></script>
         <script type="text/javascript">
             app.views.genres.init();

@@ -12,9 +12,18 @@
         <section id='title'>
             <h1 data-bind='text: movie().title'></h1>
         </section>
-        <section id='play'>
-            <p data-bind='click: play' class='arrow-right'></p>
-        </section><!-- 
+        <section class='play-btns'>
+            <div class='play-btn' id='play-raw'>
+                <h1>Raw</h1>
+                <p data-bind='click: playRaw' class='arrow-right'></p>
+            </div>
+            <div class='play-btn' id='play-mobile'>
+                <h1>Mobile</h1>
+                <p data-bind='click: playMobile' class='arrow-right'></p>
+            </div>
+        </section>
+
+        <!-- 
         <section id='info'>
             <h4 class='tagline' data-bind='text: movie().tagline'></h4>
         </section> -->

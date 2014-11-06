@@ -17,17 +17,17 @@
     <section id='globalnav'></section>
     <section id='header'>
         <div id='context'>
-            <h2 class='filter' data-bind='text: contextText()'></h2>
+            <h2 class='filter' data-bind='text: context.toString()'></h2>
             <h3 class='page' data-bind='text: "Page " + (context.page() + 1)'></h3>
         </div>
-        <div class='selected-movie'>
-            <h1 data-bind='text: selectedMovie().title'></h1>
+        <div class='selected-item'>
+            <h1 data-bind='text: selectedItem().title'></h1>
         </div>
     </section>
-    <section id='movies'>
+    <section class='paged-grid' id='movies'>
         <p data-bind='visible: showLeftArrow()' class='pager' id='page-left'></p>
-        <ul data-bind='foreach: movies()'>
-            <li class='selectable movie' data-bind='attr: { id: id }'>
+        <ul data-bind='foreach: items()'>
+            <li class='selectable grid-item movie' data-bind='attr: { id: id }'>
                 <a data-bind='attr: { href: url }'>
                     <img class='poster' data-bind='attr: { src: poster}'>
                 </a>

@@ -1,55 +1,31 @@
 var dataservice = require("../services/dataservice");
-var globalNavViewModel = require("./globalNavViewModel");
-var MoviesNavigator = require("../navigators/gridNavigator");
+var GridViewModel = require("./gridViewModel");
 var qs = require("querystring");
 var ko = require("knockout");
 
 var MoviesViewModel = function() {
     var self = this;
-    this.activeItem = ko.observable();
-    this.movies = ko.observableArray([]);
-    this.navigator = new MoviesNavigator();
-    this.context = {
-        sort: ko.observable("addedToDb"),
-        filter: ko.observable({}),
-        search: ko.observable(""),
-        page: ko.observable(0)
-    };
-
-    this.contextText = ko.computed(function() {
+    GridViewModel.call(this);
+    self.collection = "movies";
+    
+    //Additional page context
+    self.context.sort = ko.observable("addedToDb");
+    self.context.filter = ko.observable({});
+    self.context.search = ko.observable("");
+    self.context.toString = ko.computed(function() {
         var items = [];
 
-        if (self.context.filter() && self.context.filter().watched === false) {
+        if (self.context.filter && self.context.filter() && self.context.filter().watched === false) {
             items.push("unwatched");
         }
-        if (self.context.filter() && self.context.filter().genre) {
+        if (self.context.filter && self.context.filter() && self.context.filter().genre) {
             items.push(self.context.filter().genre);
         }
-        if (self.context.search()) {
+        if (self.context.search && self.context.search()) {
             items.push("'" + self.context.search() + "'");
         }
         return "Showing " + items.join(", ") + " movies";
-    }, this);
-
-    this.showLeftArrow = ko.computed(function() {
-        return self.context.page() > 0;
-    }, this);
-
-    this.showRightArrow = ko.computed(function() {
-        return self.movies().length === 10;
-    }, this);
-
-    this.selectedMovie = ko.computed(function() {
-        if (self.activeItem()) {
-            if ($("#" + self.activeItem().id).hasClass("movie")) {
-                return self.activeItem();
-            }
-        }
-        return {
-            title: "",
-            backdrop: ""
-        };
-    });
+    }, self);
 
     var processQueryString = function() {
         var params = qs.parse(window.location.search.substring(1));
@@ -68,51 +44,22 @@ var MoviesViewModel = function() {
         }
     };
 
-    var loadMovies = function() {
-        return dataservice.movies.get(self.context).then(function(movies) {
-            self.movies(movies);
-            self.navigator.populate(movies, self.showLeftArrow(), self.showRightArrow());
+    //smoothly handle background image changing
+    this.eventHandlers.navigationMove = function() {
+        $(".background.backdrop").fadeOut(function(){
+            $(".background.backdrop").remove();
             self.activeItem(self.navigator.getActiveItem());
+            var $img = $("<img style='display:none' class='background backdrop' />")
+                .load(function(){
+                    $(".background.backdrop").fadeIn();
+                })
+                .attr('src',  self.selectedItem().backdrop);  
+            $("#backgrounds").append($img);
         });
     };
-
-    var eventHandlers = {
-        pageLeft: function() {
-            self.context.page(self.context.page() > 0 ? self.context.page() - 1 : 0);
-            loadMovies().then(eventHandlers.navigationMove);
-        },
-        pageRight: function() {
-            self.context.page(self.context.page() + 1);
-            loadMovies().then(eventHandlers.navigationMove);
-        },
-        navigationMove: function() {
-            $(".background.backdrop").fadeOut(function(){
-                $(".background.backdrop").remove();
-                self.activeItem(self.navigator.getActiveItem());
-                var $img = $("<img style='display:none' class='background backdrop' />")
-                    .load(function(){
-                        $(".background.backdrop").fadeIn();
-                    })
-                    .attr('src',  self.selectedMovie().backdrop);  
-                $("#backgrounds").append($img);
-            });
-        }
-    };
-
-    var init = function() {
-        globalNavViewModel.init();
-        processQueryString();
-        loadMovies().then(function(){
-            $("body").fadeIn(function(){
-                eventHandlers.navigationMove();
-            });
-        });
-        $(document).on("page-right", eventHandlers.pageRight);
-        $(document).on("page-left", eventHandlers.pageLeft);
-        $(document).on("navigation-move", eventHandlers.navigationMove);
-    };
-
-    init();
+    
+    processQueryString();
+    this.init();
 };
 
 module.exports = MoviesViewModel;

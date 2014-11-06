@@ -38,7 +38,8 @@ var dataservice = function() {
     };
     var processGenre = function(genre) {
         genre.url = "/movies.html?genre=" + genre.name;
-        genre.id = "genre-" + genre.name;
+        genre.id = "genre-" + genre.name.replace(/ /g, "-");
+        genre.unwatchedStats = "Unwatched: " + genre.unwatched + "/" + genre.count;
         return genre;
     };
 
@@ -137,9 +138,9 @@ var dataservice = function() {
 
     /* === GENRES === */
     var genres = {
-        get: function(page){
+        get: function(context){
             return genresLoaded.then(function(){
-               return pageItems(_allGenres, page);
+               return pageItems(_allGenres, context.page());
             });
         },
         getAll: function() {

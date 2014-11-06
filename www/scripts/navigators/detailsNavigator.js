@@ -7,9 +7,14 @@ var DetailsNavigator = function() {
     this.coords = { x: 1, y: 0 }
     this.grid[0] = config.globalNav;
     this.grid[1] = [{
-        title: "play",
-        id: "play",
-        event: "play-movie"
+        title: "play-raw",
+        id: "play-raw",
+        event: "play-movie-raw"
+    }];
+    this.grid[2] =[{
+        title: "play-mobile",
+        id: "play-mobile",
+        event: "play-movie-mobile"
     }];
 };
 
