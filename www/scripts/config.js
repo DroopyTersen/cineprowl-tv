@@ -17,8 +17,7 @@ var config = {
         id: "global-nav-recent"
     }],
     apiUrl: "//cineprowlapi.azurewebsites.net/",
-    streamUrl: "http://runwatcher.com:8081/stream/",
-    playUrl: "http://localhost:5000/omc/"
+    streamUrl: "http://runwatcher.com:8081/stream/"
 };
 
 module.exports = config;

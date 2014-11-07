@@ -22,7 +22,7 @@ var HomeViewModel = function() {
             $("body").fadeIn();
             $("#searchInput").focus();
         });
-        setInterval(self.updateRandomMovie, 20000);
+        setInterval(self.updateRandomMovie, 30000);
         $(document).on("search-movies", self.search);
     };
     

@@ -16,6 +16,26 @@ var DetailsViewModel = function() {
         id: ""
     });
     
+    var omxKeyBindings = function() {
+        var base = "/omx/";
+        var keyCodes = {
+            "32": "pause", //space
+            "81": "quit", // 'q'
+            "37": "leftseek", //left arrow
+            "39": "rightseek", //right arrow
+            "38": "upseek", //up arrow
+            "40": "leftseek", //down arrow
+            "219": "volumedown", //left square bracket
+            "221": "volumeup", //right square bracket
+        };
+        
+        $(document).on("keydown", function(e){
+            if (keyCodes[e.keyCode + ""]) {
+                $.get("/omx/" + keyCodes[e.keyCode + ""]);
+            }
+        })
+    };
+    
     var init = function() {
         globalNavViewModel.init();
         var params = qs.parse(window.location.search.substring(1));
@@ -35,14 +55,13 @@ var DetailsViewModel = function() {
     };
 
     this.playRaw = function() {
-        var streamUrl = config.playUrl + self.movie().id;
-        $.get(streamUrl);
+        var omxUrl = "/omx/start/" + encodeURIComponent(config.streamUrl + self.movie().id);
+        $.get(omxUrl);
         //window.open(streamUrl);
     };
     this.playMobile = function() {
-        var streamUrl = config.playUrl + self.movie().id + "?size=mobile";
-        $.get(streamUrl);
-        //window.open(streamUrl);
+        var omxUrl = "/omx/start/" + encodeURIComponent(config.streamUrl + self.movie().id) + "?size=mobile";
+        $.get(omxUrl);
     };
 
     init();
