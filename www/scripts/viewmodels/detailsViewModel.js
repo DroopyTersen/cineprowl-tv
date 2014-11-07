@@ -17,7 +17,6 @@ var DetailsViewModel = function() {
     });
     
     var omxKeyBindings = function() {
-        var base = "/omx/";
         var keyCodes = {
             "32": "pause", //space
             "81": "quit", // 'q'
@@ -49,6 +48,7 @@ var DetailsViewModel = function() {
 
             $(document).on("play-movie-raw", self.playRaw);
             $(document).on("play-movie-mobile", self.playMobile);
+            omxKeyBindings();
         } else {
             alert("Hey dummy! Pass in an id.");
         }
