@@ -1,7 +1,7 @@
 var config = require("../config");
 var templater = require("../services/templater");
 
-var globalNavViewModel = function() {
+var GlobalNavViewModel = function() {
     
     var items = config.globalNav;
     var init = function() {
@@ -14,4 +14,4 @@ var globalNavViewModel = function() {
     };
 };
 
-module.exports = globalNavViewModel();
+module.exports = GlobalNavViewModel;

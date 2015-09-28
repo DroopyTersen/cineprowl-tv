@@ -1,71 +1,67 @@
-var globalNavViewModel = require("./globalNavViewModel");
 var GridNavigator = require("../navigators/gridNavigator");
 var dataservice = require("../services/dataservice");
-var ko = require("knockout");
-var $ = require("jquery-browserify");
+var config = require("../config");
 
 var GridViewModel = function() {
-    var self = this;
-    this.activeItem = ko.observable();
-    this.navigator = new GridNavigator();
-    this.items = ko.observableArray([]);
+	var self = this;
+	self.observables = {
+		activeItem: {},
+		items: [],
+		context: {
+			page: 1
+		},
+        globalNav: config.globalNav
+	};
+	self.navigator = new GridNavigator();
+	
+	this.shouldShowLeftArrow = function(){
+		return self.observables.context.page > 1;	
+	};
+	this.shouldShowRightArrow = function() {
+		return self.observables.items.length === 10;
+	};
+	this.getSelectedItem = function() {
+        if (self.observables.activeItem) {
+            if ($("#" + self.observables.activeItem.id).hasClass("grid-item")) {
+                return self.observables.activeItem;
+            }
+        }
+        return self.emptyItem;
+	};
     
-    this.context = {
-        page: ko.observable(0)
+	this.dataAccess = function(){
+        return dataservice[self.collection].get(self.observables.context);
     };
-
-    this.showLeftArrow = ko.computed(function() {
-        return self.context.page() > 0;
-    }, this);
-
-    this.showRightArrow = ko.computed(function() {
-        return self.items().length === 10;
-    }, this);
-
-    this.emptyItem = {
+	this.emptyItem = {
         name: "",
         id: "",
         title: "",
         backdrop: ""
     };
-    
-    this.selectedItem = ko.computed(function() {
-        if (self.activeItem()) {
-            if ($("#" + self.activeItem().id).hasClass("grid-item")) {
-                return self.activeItem();
-            }
-        }
-        return self.emptyItem;
-    });
-
-    this.dataAccess = function(){
-        return dataservice[self.collection].get(self.context);
-    };
-    
-    var loadItems = function() {
+	
+	var loadItems = function() {
         return self.dataAccess().then(function(items) {
-            self.items(items);
-            self.navigator.populate(items, self.showLeftArrow(), self.showRightArrow());
-            self.activeItem(self.navigator.getActiveItem());
+            self.observables.items = items;
+            self.navigator.populate(items, self.shouldShowLeftArrow, self.shouldShowRightArrow());
+            self.observables.activeItem = self.navigator.getActiveItem();
         });
     };
-
-    this.eventHandlers = {
+	
+	this.eventHandlers = {
         pageLeft: function() {
-            self.context.page(self.context.page() > 0 ? self.context.page() - 1 : 0);
+            self.observables.context.page = self.observables.context.page > 1 ? self.observables.context.page - 1 : 1;
             loadItems().then(self.eventHandlers.navigationMove);
         },
         pageRight: function() {
-            self.context.page(self.context.page() + 1);
+            self.observables.context.page = self.observables.context.page + 1;
             loadItems().then(self.eventHandlers.navigationMove);
         },
         navigationMove: function() {
-            self.activeItem(self.navigator.getActiveItem());
+            self.observables.activeItem = self.navigator.getActiveItem();
         }
     };
-
-    this.init = function() {
-        globalNavViewModel.init();
+	
+	this.init = function() {
         loadItems().then(function() {
             $("body").fadeIn(function() {
                 self.eventHandlers.navigationMove();

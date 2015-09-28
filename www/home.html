@@ -5,22 +5,29 @@
         <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/dist/styles.css" type="text/css" />
     </head>
-    <body style='display:none'>
+    <body id='body' style='display:none'>
         <img src="/images/background-dark.jpg" class='background texture'></img>
-        <img class='background backdrop' data-bind='attr: { src: randomMovie().backdrop }'>
-        <section id='globalnav'></section>
+        <img class='background backdrop' src='{{randomMovie.backdrop}}'>
+        <section id='globalnav'>
+            <img src='/images/logo-small.png' class='logo'>
+            <ul data-each='globalNav'>
+                <li class='selectable' id='{[id]}'>
+                    <a href='{[url]}'>{[title]}</a>
+                </li>
+            </ul>
+        </section>
         <section id='clock'>
-            <h3 data-bind='text: clock.dayDate()'></h3>
-            <h1 data-bind='text: clock.now().time'></h1>
+            <h3>{{clock.now.day}}, {{clock.now.date}}</h3>
+            <h1>{{clock.now.time}}</h1>
         </section>
         <section id='home-search' class='selectable'>
-            <form data-bind='submit: search'>
-                <input id='searchInput' placeholder='Search movies...' data-bind='textInput: searchText' />
+            <form>
+                <input id='searchInput' placeholder='Search movies...' value='{{searchText}}' />
                 <button type='submit'>Go</button>
             </form>
         </section>
         <section id='random-title'>
-            <h1 data-bind='text: randomMovie().title'></h1>
+            <h1>{{randomMovie.title}}</h1>
         </section>
         <script type="text/javascript" src="/dist/app.js"></script>
         <script type="text/javascript">

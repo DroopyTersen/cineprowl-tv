@@ -8,32 +8,39 @@
 
 </head>
 
-<body style='display:none'>
+<body style='display:none' id='body'>
     <span id='backgrounds'>
         <img src="/images/background-dark.jpg" class='background texture'>
         <img class='background backdrop'>   
     </span>
 
-    <section id='globalnav'></section>
+    <section id='globalnav'>
+        <img src='/images/logo-small.png' class='logo'>
+        <ul data-each='globalNav'>
+            <li class='selectable' id='{[id]}'>
+                <a href='{[url]}'>{[title]}</a>
+            </li>
+        </ul>
+    </section>
     <section id='header'>
         <div id='context'>
-            <h2 class='filter' data-bind='text: context.toString()'></h2>
-            <h3 class='page' data-bind='text: "Page " + (context.page() + 1)'></h3>
+            <h2 class='filter'>Showing...</h2>
+            <h3 class='page' >Page {{context.page}}</h3>
         </div>
         <div class='selected-item'>
-            <h1 data-bind='text: selectedItem().title'></h1>
+            <h1>{{activeItem.title}}</h1>
         </div>
     </section>
     <section class='paged-grid' id='movies'>
-        <p data-bind='visible: showLeftArrow()' class='pager' id='page-left'></p>
-        <ul data-bind='foreach: items()'>
-            <li class='selectable grid-item movie' data-bind='attr: { id: id }'>
-                <a data-bind='attr: { href: url }'>
-                    <img class='poster' data-bind='attr: { src: poster}'>
+        <p class='pager' id='page-left'></p>
+        <ul data-each='items'>
+            <li class='selectable grid-item movie' id='{[id]}'>
+                <a href='{[url]}'>
+                    <img class='poster' src='{[poster]}'>
                 </a>
             </li>
         </ul>
-        <p data-bind='visible: showRightArrow()' class='pager' id='page-right'></p>
+        <p class='pager' id='page-right'></p>
     </section>
     <script type="text/javascript" src="/dist/app.js"></script>
     <script type="text/javascript">

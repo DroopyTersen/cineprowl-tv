@@ -5,28 +5,41 @@
         <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/dist/styles.css" type="text/css" />
     </head>
-    <body style='display:none'>
+    <body style='display:none' id='body'>
         <img src="/images/background-dark.jpg" class='background texture'></img>
-        <img class='background backdrop' data-bind='attr: { src: movie().backdrop }'>
-        <section id='globalnav'></section>
+        <img class='background backdrop' src='{{movie.backdrop}}'>
+        <section id='globalnav'>
+            <img src='/images/logo-small.png' class='logo'>
+            <ul data-each='globalNav'>
+                <li class='selectable' id='{[id]}'>
+                    <a href='{[url]}'>{[title]}</a>
+                </li>
+            </ul>
+        </section>
         <section id='title'>
-            <h1 data-bind='text: movie().title'></h1>
+            <h1>{{movie.title}}</h1>
         </section>
         <section class='play-btns'>
             <div class='play-btn' id='play-raw'>
                 <h1>Raw</h1>
-                <p data-bind='click: playRaw' class='arrow-right'></p>
+                <p class='arrow-right'></p>
             </div>
             <div class='play-btn' id='play-mobile'>
-                <h1>Mobile</h1>
-                <p data-bind='click: playMobile' class='arrow-right'></p>
+                <h1>VLC</h1>
+                <p class='arrow-right'></p>
             </div>
         </section>
 
-        <!-- 
         <section id='info'>
-            <h4 class='tagline' data-bind='text: movie().tagline'></h4>
-        </section> -->
+            <h3 class='tagline'>{{movie.tagline}}</h3>
+            <div>
+                <span>{{movie.release_date}}</span> |
+                <span>{{movie.runtime}} minutes</span> |
+                <span>Imdb: {{movie.rating}}</span>
+            </div>
+            <p>{{movie.overview}}</p>
+        </section>
+        
         <script type="text/javascript" src="/dist/app.js"></script>
         <script type="text/javascript">
             app.views.details.init();

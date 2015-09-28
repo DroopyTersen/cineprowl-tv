@@ -54,18 +54,30 @@ display:none;
 .play-btn.cursor h1 {
     display:inherit;
 }
-#title {
+#title, #info {
     position: fixed;
+    background: rgba(0, 0, 0, .6);
+    color: #aaa;
+    z-index: 1;
+}
+#title {
     top: 40px;
     right: 0px;
-    background: rgba(0, 0, 0, .6);
-    z-index: 1;
-    color: #aaa;
     padding: 30px 40px 30px 80px;
     text-align: right;
 }
 #title h1 {
     font-weight: bold;
-    font-size: 3em;
+    font-size: 3.2em;
     margin: 0;
+}
+#info {
+    width: 600px;
+    bottom: 0;
+    margin-left: 400px;
+    padding: 10px 20px;
+    right: 0;
+}
+#info {
+    font-size: 1.55em;
 }

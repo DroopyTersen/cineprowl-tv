@@ -16,28 +16,28 @@ var startExpress = function() {
 	omx.mapKey('downseek',"$'\\x1b\\x5b\\x42'");
 	omx.mapKey('upseek',"$'\\x1b\\x5b\\x41'");
 	app.use(omx());
-
+	app.use("/vlc/:id", function(req, res){
+		var filepath = "http://runwatcher.com:8081/stream/" + req.params.id;
+		console.log(filepath);
+		launchVlc(filepath);
+	});
 	//this starts the server
 	if (process.env.IP) app.listen(process.env.PORT, process.env.IP);
 	else app.listen(EXPRESS_PORT);
 	
-	//runShell("chromium", ["--kiosk", "http://localhost:5000/home.html"]);
 	console.log("Server started on port " + process.env.PORT);
 };
 
-//Run and pipe shell script output 
-function runShell(cmd, args, cb, end) {
-	end = end || function() {};
-	var spawn = require('child_process').spawn,
-			child = spawn(cmd, args),
-			self = this;
-	
-	child.stdout.on('data', function(buffer) {
-		if (cb) {
-			cb(self, buffer);
+var launchVlc = function(filepath) {
+	var params = " -vvv " + " " + filepath,
+		exePath = '"C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"',
+		exec = require('child_process').exec;
+
+	var child = exec(exePath + params, function(err, stdout, stderr) {
+		if (err) {
+			console.log(err);
+			console.log(stderr);
 		}
 	});
-
-	child.stdout.on('end', end);
-}
+};
 startExpress();

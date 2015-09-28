@@ -110,22 +110,22 @@ var dataservice = function() {
         get: function(context) {
             return moviesLoaded.then(function() {
                 var results = _allMovies;
-                if (context.search()) {
+                if (context.search) {
                     results = results.filter(function(movie) {
-                        return movies.filters.search(movie, context.search());
+                        return movies.filters.search(movie, context.search);
                     });
                 }
-                if (context.filter()){
-                    if (context.filter().watched === false) {
+                if (context.filter){
+                    if (context.filter.watched === false) {
                         results = results.filter(movies.filters.unwatched);
                     }
-                    if (context.filter().genre) {
+                    if (context.filter.genre) {
                         results = results.filter(function(movie) {
-                            return movies.filters.genre(movie, context.filter().genre);
+                            return movies.filters.genre(movie, context.filter.genre);
                         });
                     }
                 }
-                return pageItems(results, context.page());
+                return pageItems(results, context.page - 1);
             });
 
         },
@@ -140,7 +140,7 @@ var dataservice = function() {
     var genres = {
         get: function(context){
             return genresLoaded.then(function(){
-               return pageItems(_allGenres, context.page());
+               return pageItems(_allGenres, context.page - 1);
             });
         },
         getAll: function() {

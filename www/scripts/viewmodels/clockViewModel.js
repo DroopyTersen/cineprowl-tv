@@ -1,35 +1,25 @@
-var ko = require("knockout");
 var moment = require("moment");
 
-var clockViewModel = function() {
-    var now = ko.observable({
+var ClockViewModel = function() {
+    this.now = {
         day: "",
         date: "",
         time: ""
-    });
-    
-    var dayDate = ko.computed(function(){
-        return now().day + ", " + now().date;
-    }, this);
-    
-    var update = function() {
-        var _now = moment();
-        now({
-            day: _now.format("dddd"),
-            date: _now.format("MMM Do"),
-            time: _now.format("h:mm a")
-        });
-    };
-    var init = function() {
-        update();
-        setInterval(update, 20000);
-    };
-    
-    return {
-        init: init,
-        now: now,
-        dayDate: dayDate
     };
 };
 
-module.exports = clockViewModel();
+ClockViewModel.prototype.init = function() {
+    this.update();
+    setInterval(this.update.bind(this), 20000);
+};
+
+ClockViewModel.prototype.update = function() {
+    var _now = moment();
+    this.now = {
+        day: _now.format("dddd"),
+        date: _now.format("MMM Do"),
+        time: _now.format("h:mm a")
+    };
+};
+
+module.exports = ClockViewModel;

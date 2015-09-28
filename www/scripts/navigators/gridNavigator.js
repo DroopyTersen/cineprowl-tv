@@ -18,7 +18,7 @@ GridNavigator.prototype.populate = function(items, pageLeft, pageRight) {
     this.grid = [];
     this.grid[0] = config.globalNav;
     if (pageLeft) {
-        this.grid[1] = [{ id: "page-left", event: "page-left" }];
+        this.grid[1] = [{ id: "page-left", event: "page-left", title: "", name: "" }];
         this.fillGrid(2, items);
         this.coords.x = items.length ? 2 : 1;
     } else {
@@ -27,7 +27,7 @@ GridNavigator.prototype.populate = function(items, pageLeft, pageRight) {
     }
     
     if (pageRight) {
-        this.appendColumn([{ id: "page-right", event: "page-right" }]);
+        this.appendColumn([{ id: "page-right", event: "page-right", title: "", name: "" }]);
     }
     return this.getActiveItem();
 };

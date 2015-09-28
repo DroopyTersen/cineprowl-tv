@@ -3,7 +3,7 @@ var $ = require("jquery-browserify");
 var Navigator = require("./baseNavigator");
 var HomeNavigator = function() {
     Navigator.call(this);
-    this.coords = { x: 1, y: 0 }
+    this.coords = { x: 1, y: 0 };
     this.grid[0] = config.globalNav;
     this.grid[1] = [{
         title: "Search",
