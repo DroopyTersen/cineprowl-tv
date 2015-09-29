@@ -10,6 +10,10 @@ var baseView = function(ViewModel) {
     var init = function() {
         viewModel = new ViewModel();
         viewModel.binding = new Binding('body',viewModel.observables);
+        $(document).on("navigate-back", function() {
+            console.log("go back");
+            window.history.back();
+        });
     };
     return {
         vm: function() { return viewModel; },

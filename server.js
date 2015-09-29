@@ -29,7 +29,7 @@ var startExpress = function() {
 };
 
 var launchVlc = function(filepath) {
-	var params = " -vvv " + " " + filepath,
+	var params = " -f " + " " + filepath,
 		exePath = '"C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"',
 		exec = require('child_process').exec;
 

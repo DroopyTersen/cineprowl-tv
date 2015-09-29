@@ -23,6 +23,12 @@
     list-style: none;
     margin: 0;
 }
+#back-button {
+position: fixed;
+    height: 60px;
+    color: rgba(255, 255, 255, .5);
+    left: -15px;
+}
 #globalnav li {
     font-size: 2.5em;
     padding: 30px 20px;

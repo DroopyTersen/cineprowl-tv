@@ -15,7 +15,11 @@
     </span>
 
     <section id='globalnav'>
+        <div class='selectable' id='back-button'>
+            <span class="arrow arrow-left"></span>
+        </div>
         <img src='/images/logo-small.png' class='logo'>
+        
         <ul data-each='globalNav'>
             <li class='selectable' id='{[id]}'>
                 <a href='{[url]}'>{[title]}</a>
@@ -24,7 +28,7 @@
     </section>
     <section id='header'>
         <div id='context'>
-            <h2 class='filter'>Showing...</h2>
+            <h2 class='filter'>{{context.message}}</h2>
             <h3 class='page' >Page {{context.page}}</h3>
         </div>
         <div class='selected-item'>

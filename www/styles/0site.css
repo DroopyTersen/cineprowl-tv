@@ -20,7 +20,7 @@ body {
     font-size: 18px;
     font-weight: 200;
     position: absolute;
-    transform: scale(.965, .965);
+    transform: scale(.98, .98);
 }
 .arrow-right {
     width: 0;

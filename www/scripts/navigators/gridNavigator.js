@@ -4,7 +4,7 @@ var Navigator = require("./baseNavigator");
 
 var GridNavigator = function() {
     Navigator.call(this);
-    this.coords = { x: 2, y: 0 }
+    this.coords = { x: 2, y: 0 };
 };
 
 GridNavigator.prototype = Navigator.prototype;
@@ -16,14 +16,15 @@ GridNavigator.prototype.fillGrid = function(startColumn, items) {
 
 GridNavigator.prototype.populate = function(items, pageLeft, pageRight) {
     this.grid = [];
-    this.grid[0] = config.globalNav;
+    this.grid[0] = [{ id: "back-button", event: "navigate-back", title: "", name: "" }];
+    this.grid[1] = config.globalNav;
     if (pageLeft) {
-        this.grid[1] = [{ id: "page-left", event: "page-left", title: "", name: "" }];
-        this.fillGrid(2, items);
-        this.coords.x = items.length ? 2 : 1;
+        this.grid[2] = [{ id: "page-left", event: "page-left", title: "", name: "" }];
+        this.fillGrid(3, items);
+        this.coords.x = items.length ? 3 : 2;
     } else {
-        this.fillGrid(1, items);
-        this.coords.x = items.length ? 1 : 0;
+        this.fillGrid(3, items);
+        this.coords.x = items.length ? 2 : 1;
     }
     
     if (pageRight) {

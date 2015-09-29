@@ -1,17 +1,18 @@
 var GridNavigator = require("../navigators/gridNavigator");
 var dataservice = require("../services/dataservice");
 var config = require("../config");
+var Context = require("../services/context");
 
 var GridViewModel = function() {
 	var self = this;
 	self.observables = {
 		activeItem: {},
 		items: [],
-		context: {
-			page: 1
-		},
+		context: new Context(),
         globalNav: config.globalNav
 	};
+    self.observables.context.fromUrl();
+    
 	self.navigator = new GridNavigator();
 	
 	this.shouldShowLeftArrow = function(){
@@ -50,10 +51,12 @@ var GridViewModel = function() {
 	this.eventHandlers = {
         pageLeft: function() {
             self.observables.context.page = self.observables.context.page > 1 ? self.observables.context.page - 1 : 1;
+            window.history.replaceState({}, "context", self.observables.context.toUrl());
             loadItems().then(self.eventHandlers.navigationMove);
         },
         pageRight: function() {
             self.observables.context.page = self.observables.context.page + 1;
+            window.history.replaceState({}, "context", self.observables.context.toUrl());
             loadItems().then(self.eventHandlers.navigationMove);
         },
         navigationMove: function() {
