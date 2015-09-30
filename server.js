@@ -1,5 +1,6 @@
 var express = require("express");
 var omx = require("omxcontrol");
+//var cineprowlApiApp = require("CineProwl.Api");
 
 var EXPRESS_PORT = 5000;
 
@@ -8,7 +9,7 @@ var startExpress = function() {
 	var app = express();
 	//this makes our static files servable
 	app.use(express.static(__dirname + "/www"));
-	
+	//app.use("/api", cineprowlApiApp);
 	omx.mapKey('volumeup',"+");
 	omx.mapKey("volumedown", "-");
 	omx.mapKey('leftseek',"$'\\x1b\\x5b\\x44'");
@@ -20,6 +21,10 @@ var startExpress = function() {
 		var filepath = "http://runwatcher.com:8081/stream/" + req.params.id;
 		console.log(filepath);
 		launchVlc(filepath);
+	});
+	
+	app.use("/%7B%7Bmovie.backdrop%7D%7D", function(req, res) {
+		return res.send("");
 	});
 	//this starts the server
 	if (process.env.IP) app.listen(process.env.PORT, process.env.IP);
@@ -39,5 +44,9 @@ var launchVlc = function(filepath) {
 			console.log(stderr);
 		}
 	});
+};
+
+module.exports = {
+	start: startExpress
 };
 startExpress();

@@ -43,6 +43,15 @@
             <p>{{movie.overview}}</p>
         </section>
         
+        <section id='starring'>
+            <ul data-each='movie.starring'>
+                <li>
+                    <img src='{[profilePic]}'/>
+                    <h3>{[name]}</h3>
+                </li>
+            </ul>
+        </section>
+        
         <script type="text/javascript" src="/dist/app.js"></script>
         <script type="text/javascript">
             app.views.details.init();

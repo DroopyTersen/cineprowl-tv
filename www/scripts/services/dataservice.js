@@ -7,7 +7,7 @@ var dataservice = function() {
     var _allMovies = [];
     var _allGenres = [];
     var pageSize = 10;
-    var cacheKey = "cineprowl-allmovies";
+    var allMoviesCacheKey = "cineprowl-allmovies";
     var genreCacheKey = "cineprowl-genres";
 
     var moviesLoaded = new $.Deferred();
@@ -18,6 +18,17 @@ var dataservice = function() {
     var processMovies = function(movies) {
         movies.forEach(processMovie);
         return movies;
+    };
+    var processStarring = function(movie) {
+        movie.starring = [];
+        if (movie.casts && movie.casts.cast) {
+            for (var i = 0; i < 4 && i < movie.casts.cast.length; i++) {
+                movie.starring.push({
+                    name: movie.casts.cast[i].name,
+                    profilePic: imageHelper.profile.getMid(movie.casts.cast[i].profile_path)
+                });
+            }
+        }
     };
     var processMovie = function(movie) {
         movie.url = "/details.html?id=" + movie.id;
@@ -65,7 +76,7 @@ var dataservice = function() {
     /* === MOVIES === */
     var movies = {
         getAll: function(sort) {
-            var cachedValue = cache.getObject(cacheKey);
+            var cachedValue = cache.getObject(allMoviesCacheKey);
             if (cachedValue !== null) {
                 _allMovies = cachedValue;
                 moviesLoaded.resolve(cachedValue);
@@ -73,7 +84,7 @@ var dataservice = function() {
             else {
                 loadAll().then(function(movies) {
                     _allMovies = movies;
-                    cache.setObject(cacheKey, _allMovies);
+                    cache.setObject(allMoviesCacheKey, _allMovies);
                     moviesLoaded.resolve(_allMovies);
                 });
             }
@@ -130,7 +141,20 @@ var dataservice = function() {
 
         },
         byId: function(id) {
-            return loadOne(id);
+            var cacheKey = "movie-" + id;
+            var cachedValue = cache.getObject(cacheKey);
+            var movieLoaded = new $.Deferred();
+            if (cachedValue !== null) {
+                movieLoaded.resolve(cachedValue);
+            }
+            else {
+                loadOne(id).then(function(movie) {
+                    processStarring(movie);
+                    cache.setObject(cacheKey, movie);
+                    movieLoaded.resolve(movie);
+                });
+            }
+            return movieLoaded.promise();
         }
     };
 

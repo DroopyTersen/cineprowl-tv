@@ -308,6 +308,13 @@ img.background.backdrop {
 .centered {
     margin:auto;
 }
+img.background.backdrop.fade {
+   opacity: 0;
+   transition: opacity .35s ease-in-out;
+}
+img.background.backdrop.showing {
+    opacity: 1;
+}
 
 #clock {
 position: fixed;
@@ -526,7 +533,7 @@ display:none;
 .play-btn.cursor h1 {
     display:inherit;
 }
-#title, #info {
+#title, #info, #starring {
     position: fixed;
     background: rgba(0, 0, 0, .6);
     color: #aaa;
@@ -549,9 +556,33 @@ display:none;
     margin-left: 400px;
     padding: 10px 20px;
     right: 0;
-}
-#info {
     font-size: 1.55em;
+    max-height: 550px;
+}
+#starring {
+    bottom:0;
+    left: 400px;
+    padding:20px;
+}
+#starring ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#starring li {
+    float: left;
+    margin-right: 20px;
+}
+#starring li:last-child{
+    margin-right:0;
+}
+#starring h3 {
+    margin: 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+#starring img {
+    border: 4px solid #BABABA;
 }
 #genres .grid-item {
     text-align:center;

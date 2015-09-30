@@ -10,15 +10,16 @@ var MoviesViewModel = function() {
     //smoothly handle background image changing
     this.eventHandlers.navigationMove = function() {
         self.observables.activeItem = self.navigator.getActiveItem();
-        $(".background.backdrop").fadeOut(function(){
+        $(".background.backdrop").removeClass("showing");
+        setTimeout(function(){
             $(".background.backdrop").remove();
-            var $img = $("<img style='display:none' class='background backdrop' />")
+            var $img = $("<img class='background backdrop fade' />")
                 .load(function(){
-                    $(".background.backdrop").fadeIn();
+                    $(".background.backdrop").addClass("showing");
                 })
                 .attr('src',  self.getSelectedItem().backdrop);  
             $("#backgrounds").append($img);
-        });
+        }, 300);
     };
     
     this.init();

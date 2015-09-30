@@ -9,16 +9,16 @@ var paths = {
     scripts: './www/scripts/**/*.js'
 }
 
-var setupWatch = function() {
-	for (var pathName in paths) {
-		if (paths.hasOwnProperty(pathName)){
-			gulp.watch(paths[pathName], function(){
-			    concatCss();
-			    browserifyJs();
-			});
-		}
-	}
-};
+// var setupWatch = function() {
+// 	for (var pathName in paths) {
+// 		if (paths.hasOwnProperty(pathName)){
+// 			gulp.watch(paths[pathName], function(){
+// 			    concatCss();
+// 			    browserifyJs();
+// 			});
+// 		}
+// 	}
+// };
 
 var concatCss = function() {
     gulp.src(paths.css)
@@ -36,8 +36,8 @@ var browserifyJs = function() {
       insertGlobals : true,
       debug : true
     }))
-    //.pipe(uglify())
-    .pipe(gulp.dest(paths.dist))
+    // .pipe(uglify())
+    .pipe(gulp.dest(paths.dist));
 };
 
 gulp.task('css', concatCss);

@@ -58,7 +58,7 @@ var GridViewModel = function() {
             self.observables.context.page = self.observables.context.page + 1;
             window.history.replaceState({}, "context", self.observables.context.toUrl());
             loadItems().then(self.eventHandlers.navigationMove);
-        },
+    },
         navigationMove: function() {
             self.observables.activeItem = self.navigator.getActiveItem();
         }

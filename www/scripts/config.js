@@ -16,7 +16,8 @@ var config = {
             url: "/movies.html?sort=addedToDb",
             id: "global-nav-recent"
         }],
-    apiUrl: "//cineprowlapi.azurewebsites.net/",
+    apiUrl: "http://localhost:4445/",
+    //apiUrl: "//cineprowlapi.azurewebsites.net/",
     streamUrl: "http://runwatcher.com:8081/stream/"
 };
 
