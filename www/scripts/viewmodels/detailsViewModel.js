@@ -46,8 +46,8 @@ var DetailsViewModel = function() {
                 });
             });
 
-            $(document).on("play-movie-raw", self.playRaw);
-            $(document).on("play-movie-mobile", self.playMobile);
+            $(document).on("play-movie-vlc", self.playVlc);
+            $(document).on("play-movie-trailer", self.playTrailer);
             omxKeyBindings();
         } else {
             alert("Hey dummy! Pass in an id.");
@@ -58,13 +58,15 @@ var DetailsViewModel = function() {
         var omxUrl = "/omx/start/" + encodeURIComponent(config.streamUrl + self.movie().id);
         $.get(omxUrl);
         //window.open(streamUrl);
-    };
-    this.playMobile = function() {
-        $.get("/vlc/" + self.observables.movie.id);
         //var omxUrl = "/omx/start/" + encodeURIComponent(config.streamUrl + self.movie().id) + "?size=mobile";
         //$.get(omxUrl);
     };
-
+    this.playVlc = function() {
+        $.get("/vlc/" + self.observables.movie.id);
+    };
+    this.playTrailer = function() {
+        window.open(self.observables.movie.trailerUrl);
+    }
     init();
 };
 

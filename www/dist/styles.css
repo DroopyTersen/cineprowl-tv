@@ -492,7 +492,7 @@ left: 20px;
     float:left;
     z-index:1;
 }
-#play-raw {
+#play-vlc {
 margin-right: -140px;
 }
 
@@ -509,7 +509,7 @@ text-shadow: 1px 1px 2px #FF6B00;
 display:none;
 }
 
-#play-mobile h1 {
+#play-trailer h1 {
     font-size:2em;
     top:140px;
 }
@@ -527,7 +527,7 @@ display:none;
     left:20px;
     z-index:10;
 }
-#play-mobile.cursor {
+#play-trailer.cursor {
     top:-58px;
 }
 .play-btn.cursor h1 {

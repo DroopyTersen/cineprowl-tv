@@ -8,14 +8,14 @@ var DetailsNavigator = function() {
     this.grid[0] = [{ id: "back-button", event: "navigate-back", title: "", name: "" }];
     this.grid[1] = config.globalNav;
     this.grid[2] = [{
-        title: "play-raw",
-        id: "play-raw",
-        event: "play-movie-raw"
+        title: "play-vlc",
+        id: "play-vlc",
+        event: "play-movie-vlc"
     }];
     this.grid[3] =[{
-        title: "play-mobile",
-        id: "play-mobile",
-        event: "play-movie-mobile"
+        title: "play-trailer",
+        id: "play-trailer",
+        event: "play-movie-trailer"
     }];
 };
 

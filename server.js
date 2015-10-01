@@ -27,10 +27,11 @@ var startExpress = function() {
 		return res.send("");
 	});
 	//this starts the server
-	if (process.env.IP) app.listen(process.env.PORT, process.env.IP);
-	else app.listen(EXPRESS_PORT);
+	var port = process.env.PORT || EXPRESS_PORT;
+	if (process.env.IP) app.listen(port, process.env.IP);
+	else app.listen(port);
 	
-	console.log("Server started on port " + process.env.PORT);
+	console.log("Server started on port " + port);
 };
 
 var launchVlc = function(filepath) {
@@ -49,4 +50,4 @@ var launchVlc = function(filepath) {
 module.exports = {
 	start: startExpress
 };
-startExpress();
+

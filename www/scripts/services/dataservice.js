@@ -19,8 +19,14 @@ var dataservice = function() {
         movies.forEach(processMovie);
         return movies;
     };
-    var processStarring = function(movie) {
-        movie.starring = [];
+    var processMovie = function(movie) {
+        movie.url = "/details.html?id=" + movie.id;
+        movie.poster = imageHelper.poster.getMid(movie.poster_path);
+        movie.backdrop = imageHelper.backdrop.getMid(movie.backdrop_path);
+        
+
+        // Starring
+        movie.starring = []
         if (movie.casts && movie.casts.cast) {
             for (var i = 0; i < 4 && i < movie.casts.cast.length; i++) {
                 movie.starring.push({
@@ -29,12 +35,13 @@ var dataservice = function() {
                 });
             }
         }
-    };
-    var processMovie = function(movie) {
-        movie.url = "/details.html?id=" + movie.id;
-        //movie.poster = imageHelper.buildLink("w342", movie.poster_path);
-        movie.poster = imageHelper.poster.getMid(movie.poster_path);
-        movie.backdrop = imageHelper.backdrop.getMid(movie.backdrop_path);
+        
+        // Trailer
+        if (movie.trailers && movie.trailers.youtube && movie.trailers.youtube.length) {
+            movie.trailerUrl = "https://www.youtube.com/embed/" + movie.trailers.youtube[0].source + "?autoplay=1";
+        } else {
+            movie.trailerUrl = "https://www.youtube.com/results?search_query=" + movie.title.replace(" ", "+") + "+trailer";
+        }
         return movie;
     };
     var processGenres = function(genres) {
@@ -149,7 +156,6 @@ var dataservice = function() {
             }
             else {
                 loadOne(id).then(function(movie) {
-                    processStarring(movie);
                     cache.setObject(cacheKey, movie);
                     movieLoaded.resolve(movie);
                 });
