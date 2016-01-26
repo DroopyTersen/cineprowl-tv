@@ -21,15 +21,16 @@ var dataservice = function() {
     };
     var processMovie = function(movie) {
         movie.url = "/details.html?id=" + movie.id;
-        movie.poster = imageHelper.poster.getMid(movie.poster_path);
-        movie.backdrop = imageHelper.backdrop.getMid(movie.backdrop_path);
-        
+        movie.poster = movie.posterThumb ? movie.posterThumb.replace("w92", "w185") : imageHelper.poster.getMid(movie.poster_path);
+        movie.backdrop = movie.backdrop || imageHelper.backdrop.getMid(movie.backdrop_path);
 
         // Starring
         movie.starring = []
         if (movie.casts && movie.casts.cast) {
             for (var i = 0; i < 4 && i < movie.casts.cast.length; i++) {
                 movie.starring.push({
+                    id: movie.casts.cast[i].id,
+                    url: "/movies.html?actor=" + movie.casts.cast[i].name + "&actorId=" + movie.casts.cast[i].id,
                     name: movie.casts.cast[i].name,
                     profilePic: imageHelper.profile.getMid(movie.casts.cast[i].profile_path)
                 });
@@ -79,6 +80,11 @@ var dataservice = function() {
         return $.getJSON(config.apiUrl + "/movies?$select=title,id,poster_path,backdrop_path,watched,rating,addedToDb,genres&$top=2000" + orderby)
             .then(processMovies);
     };
+    
+    var loadFilmography = function(actorId) {
+        return $.getJSON(config.apiUrl + "/actors/" + actorId)
+            .then(processMovies);
+    }
 
     /* === MOVIES === */
     var movies = {
@@ -126,25 +132,30 @@ var dataservice = function() {
             }
         },
         get: function(context) {
-            return moviesLoaded.then(function() {
-                var results = _allMovies;
-                if (context.search) {
-                    results = results.filter(function(movie) {
-                        return movies.filters.search(movie, context.search);
-                    });
-                }
-                if (context.filter){
-                    if (context.filter.watched === false) {
-                        results = results.filter(movies.filters.unwatched);
-                    }
-                    if (context.filter.genre) {
+            if (context.actorId) {
+                return loadFilmography(context.actorId);
+            } else {
+                 return moviesLoaded.then(function() {
+                    var results = _allMovies;
+                    if (context.search) {
                         results = results.filter(function(movie) {
-                            return movies.filters.genre(movie, context.filter.genre);
+                            return movies.filters.search(movie, context.search);
                         });
                     }
-                }
-                return pageItems(results, context.page - 1);
-            });
+                    if (context.filter){
+                        if (context.filter.watched === false) {
+                            results = results.filter(movies.filters.unwatched);
+                        }
+                        if (context.filter.genre) {
+                            results = results.filter(function(movie) {
+                                return movies.filters.genre(movie, context.filter.genre);
+                            });
+                        }
+                    }
+                    return pageItems(results, context.page - 1);
+                });
+            }
+           
 
         },
         byId: function(id) {

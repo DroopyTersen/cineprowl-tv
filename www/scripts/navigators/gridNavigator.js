@@ -7,7 +7,9 @@ var GridNavigator = function() {
     this.coords = { x: 2, y: 0 };
 };
 
-GridNavigator.prototype = Navigator.prototype;
+// GridNavigator.prototype = Navigator.prototype;
+GridNavigator.prototype = Object.create(Navigator.prototype);
+
 
 GridNavigator.prototype.fillGrid = function(startColumn, items) {
     this.appendRow(items.slice(0,5), startColumn);

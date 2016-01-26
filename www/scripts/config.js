@@ -5,7 +5,7 @@ var config = {
             id: "global-nav-home"
         }, {
             title: "Unwatched",
-            url: "/movies.html?watched=false",
+            url: "../movies/movies.html?watched=false",
             id: "global-nav-unwatched"
         }, {
             title: "Genres",
@@ -13,10 +13,10 @@ var config = {
             id: "global-nav-genres"
         }, {
             title: "Recent",
-            url: "/movies.html?sort=addedToDb",
+            url: "../movies/movies.html?sort=addedToDb",
             id: "global-nav-recent"
         }],
-    apiUrl: "http://localhost:4445/",
+    apiUrl: "http://api.cineprowl.com/",
     //apiUrl: "//cineprowlapi.azurewebsites.net/",
     streamUrl: "http://runwatcher.com:8081/stream/"
 };

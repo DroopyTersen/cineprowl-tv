@@ -17,9 +17,13 @@ MovieContext.prototype.toWords = function() {
 	if (this.search) {
 		items.push("'" + this.search + "'");
 	}
+	if (this.actorId && this.actor) {
+		items.push(this.actor);
+	}
+	
 	if (items.length === 0 && this.sort === "addedToDb") {
 		items.push("recently added");
-	} 
+	}
 	return "Showing " + items.join(", ") + " movies";
 };
 
@@ -42,6 +46,10 @@ MovieContext.prototype.fromUrl = function() {
 	if (params.sort) {
 		this.sort = params.sort;
 	}
+	if (params.actorId) {
+		this.actorId = params.actorId;
+		this.actor = params.actor || "";
+	}
 };
 
 MovieContext.prototype.toUrl = function() {
@@ -60,6 +68,10 @@ MovieContext.prototype.toUrl = function() {
 	}
 	if (this.sort) {
 		params.push("sort=" + this.sort);
+	}
+	if (this.actorId) {
+		params.push("actorId=" + this.actorId);
+		params.push("actor=" + this.actor);
 	}
 	var queryString = "?" + params.join("&");
 	return window.location.origin + window.location.pathname + queryString;

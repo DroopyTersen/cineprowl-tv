@@ -41,6 +41,7 @@ var DetailsViewModel = function() {
         if (params.id) {
             dataservice.movies.byId(params.id).then(function(movie) {
                 self.observables.movie = movie;
+                self.navigator.populate(movie.starring);
                 $("body").fadeIn(function() {
                     self.navigator.getActiveItem();
                 });
